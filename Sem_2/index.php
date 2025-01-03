@@ -99,7 +99,7 @@
     $arr = mb_str_split($str);
     foreach ($arr as $ch) {
         if ($ch === mb_strtoupper($ch) && array_key_exists(mb_strtolower($ch), $alphabet)) {
-            $result = $result . mb_strtoupper($alphabet[mb_strtolower($ch)]);
+            $result = $result . ucfirst($alphabet[mb_strtolower($ch)]);
         } elseif (array_key_exists($ch, $alphabet)){
             $result = $result . $alphabet[$ch];
         } else {
