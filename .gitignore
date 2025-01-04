@@ -1,0 +1,3 @@
+# Ignore Comsoser's configs
+/Sem_3/vendor/
+/Sem_3/composer.lock

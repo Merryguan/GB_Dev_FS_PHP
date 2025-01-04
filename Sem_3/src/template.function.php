@@ -13,7 +13,10 @@ function handleHelp() : string {
     
     $help .= "Доступные команды: \r\n";
     $help .= "read-all - чтение всего файла \r\n";
+    $help = $help . "search-births - поиск дней рождения на текущую дату \r\n";
     $help .= "add - добавление записи \r\n";
+    $help = $help . "del-name - удаление записи по имени. \r\n";
+    $help = $help . "del-date - удаление записи по дате. \r\n";
     $help .= "clear - очистка файла \r\n";
     $help .= "read-profiles - вывести список профилей пользователей \r\n";
     $help .= "read-profile - вывести профиль выбранного пользователя \r\n";

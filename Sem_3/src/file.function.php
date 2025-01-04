@@ -27,18 +27,109 @@ function addFunction(array $config) : string {
 
     $name = readline("Введите имя: ");
     $date = readline("Введите дату рождения в формате ДД-ММ-ГГГГ: ");
+    if (!validateData($date)) {
+        return handleError("Неверная дата.");
+    }
     $data = $name . ", " . $date . "\r\n";
 
     $fileHandler = fopen($address, 'a');
 
     if(fwrite($fileHandler, $data)){
-        return "Запись $data добавлена в файл $address"; 
+        return "Запись $data добавлена в файл $address" . "\r\n"; 
     }
     else {
         return handleError("Произошла ошибка записи. Данные не сохранены");
     }
 
     fclose($fileHandler);
+}
+
+function delByNameFunction(array $config) : string {
+    $address = $config['storage']['address'];
+
+    $name = readline("Введите имя: ");
+
+    if (file_exists($address) && is_readable($address)) {
+        $file = fopen($address, "rb");
+
+        $line = '';
+        $content = '';
+        $result = ''; 
+    
+        while (!feof($file)) {
+            $line = explode(",", fgets($file));
+            if (count($line) > 0) {
+                if ($line[0] == $name) {
+                    $result = $result . implode(",", $line);
+                } else {
+                    $content = $content . implode(",", $line);
+                }
+            }
+        }
+
+        fclose($file);
+
+        $file = fopen($address, "w");
+
+        fwrite($file, $content);
+        fclose($file);
+
+        if (!empty($result)) {
+            return $result;
+        } else {
+            return "Запись не найдена." . "\r\n";
+        }
+        
+    }
+    else {
+        return handleError("Файл не существует");
+    }
+}
+
+function delByDateFunction(array $config) : string {
+    $address = $config['storage']['address'];
+
+    $date = readline("Введите дату рождения в формате ДД-ММ-ГГГГ: ");
+
+    if (file_exists($address) && is_readable($address)) {
+        $file = fopen($address, "rb");
+        
+        $dateBlocks = explode("-", $date);
+
+        $line = '';
+        $content = '';
+        $result = ''; 
+    
+        while (!feof($file)) {
+            $line = explode(",", fgets($file));
+            if (count($line) > 1) {
+                $dateBirthdayBlocks = explode("-", $line[1]);
+                if ($dateBirthdayBlocks[0] == $dateBlocks[0] && 
+                    $dateBirthdayBlocks[1] == $dateBlocks[1]) {
+                    $result = $result . implode(",", $line);
+                } else {
+                    $content = $content . implode(",", $line);
+                }
+            }
+        }
+
+        fclose($file);
+
+        $file = fopen($address, "w");
+
+        fwrite($file, $content);
+        fclose($file);
+
+        if (!empty($result)) {
+            return $result;
+        } else {
+            return "Запись не найдена." . "\r\n";
+        }
+        
+    }
+    else {
+        return handleError("Файл не существует");
+    }
 }
 
 // function clearFunction(string $address) : string {
@@ -112,4 +203,41 @@ function readProfile(array $config): string {
     $info .= "Фамилия: " . $contentArray['lastname'] . "\r\n";
 
     return $info;
+}
+
+function searchBirthdays(array $config) : string {
+    $address = $config['storage']['address'];
+
+    if (file_exists($address) && is_readable($address)) {
+        $file = fopen($address, "rb");
+        
+        $dateCurrent = date("d-m-Y");
+        $dateCurrentBlocks = explode("-", $dateCurrent);
+
+        $content = '';
+        $result = ''; 
+    
+        while (!feof($file)) {
+            $content = explode(",", fgets($file));
+            if (count($content) > 1) {
+                $dateBirthdayBlocks = explode("-", $content[1]);
+                if ($dateBirthdayBlocks[0] == $dateCurrentBlocks[0] && 
+                    $dateBirthdayBlocks[1] == $dateCurrentBlocks[1]) {
+                    $result = $result . implode(",", $content);
+                }
+            }
+        }
+
+        fclose($file);
+
+        if (!empty($result)) {
+            return $result;
+        } else {
+            return "Сегодня дней рождений нет." . "\r\n";
+        }
+        
+    }
+    else {
+        return handleError("Файл не существует");
+    }
 }

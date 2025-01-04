@@ -25,7 +25,10 @@ function parseCommand() : string {
     if(isset($_SERVER['argv'][1])) {
         $functionName = match($_SERVER['argv'][1]) {
             'read-all' => 'readAllFunction',
+            'search-births' => 'searchBirthdays',
             'add' => 'addFunction',
+            'del-name' => 'delByNameFunction',
+            'del-date' => 'delByDateFunction',
             'clear' => 'clearFunction',
             'read-profiles' => 'readProfilesDirectory',
             'read-profile' => 'readProfile',
