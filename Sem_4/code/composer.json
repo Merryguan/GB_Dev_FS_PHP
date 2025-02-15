@@ -1,0 +1,16 @@
+{
+    "name": "app/hw",
+    "version": "0.1",
+    "autoload": {
+        "psr-4": {
+            "App\\Hw\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Name",
+            "email": "e-mail@domain.com"
+        }
+    ],
+    "require": {}
+}
