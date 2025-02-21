@@ -47,7 +47,7 @@ class UserController {
                 'user-added.twig',
                 [
                     'title' => 'Список пользователей в хранилище',
-                    'time' => date('H:i:s'),
+                    'time' => date('H:i:s', time() + 3 * 60 * 60),
                     'menu' => ['Главная' => '/'],
                     'message' => "Список пуст или не найден"
                 ]);
@@ -57,7 +57,7 @@ class UserController {
                 'user-added.twig',
                 [
                     'title' => 'Пользователь добавлен в хранилище',
-                    'time' => date('H:i:s'),
+                    'time' => date('H:i:s', time() + 3 * 60 * 60),
                     'menu' => ['Главная' => '/'],
                     'users' => $users
                 ]);

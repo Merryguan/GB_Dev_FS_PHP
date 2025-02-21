@@ -12,7 +12,7 @@ class PageController {
             'page-index.twig', 
             [
                 'title' => 'Главная страница',
-                'time' => date('H:i:s'),
+                'time' => date('H:i:s', time() + 3 * 60 * 60),
                 'menu' => ['Пользователи' => '/user']
             ]);
     }

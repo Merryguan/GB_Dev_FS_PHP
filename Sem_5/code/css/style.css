@@ -35,8 +35,6 @@ a:visited {
     background-color: rgb(104, 124, 143);
 }
 
-
-
 .main__info {
     padding-left: 30px;
     padding-right: 30px;
@@ -44,7 +42,14 @@ a:visited {
     padding-bottom: 30px;
 }
 
-.main__form {
+.user__info {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.user__form {
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 30px;
