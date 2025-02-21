@@ -1,3 +1,9 @@
 # Ignore Comsoser's configs
 /Sem_3/vendor/
 /Sem_3/composer.lock
+
+/Sem_6/code/vendor/
+/Sem_6/code/composer.lock
+
+# Ignore .env
+/Sem_6/.env
