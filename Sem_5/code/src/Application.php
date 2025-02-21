@@ -50,7 +50,7 @@ class Application {
             header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
             die();
 /*            return "Класс $this->controllerName не существует";*/
-            /*$this->controllerName = Application::APP_NAMESPACE . "ErrorController";
+/*            $this->controllerName = Application::APP_NAMESPACE . "ErrorController";
             $this->methodName = "actionError";
             $controllerInstance = new $this->controllerName();
             return call_user_func_array(
