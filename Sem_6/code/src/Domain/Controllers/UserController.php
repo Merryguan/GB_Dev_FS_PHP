@@ -14,7 +14,7 @@ class UserController {
 
         if(!$users){
             return $render->renderPage(
-                'user-empty.tpl', 
+                'user-empty.twig', 
                 [
                     'title' => 'Список пользователей в хранилище',
                     'message' => "Список пуст или не найден"
@@ -22,7 +22,7 @@ class UserController {
         }
         else{
             return $render->renderPage(
-                'user-index.tpl', 
+                'user-index.twig', 
                 [
                     'title' => 'Список пользователей в хранилище',
                     'users' => $users
@@ -39,7 +39,7 @@ class UserController {
             $render = new Render();
 
             return $render->renderPage(
-                'user-created.tpl', 
+                'user-created.twig', 
                 [
                     'title' => 'Пользователь создан',
                     'message' => "Создан пользователь " . $user->getUserName() . " " . $user->getUserLastName()
@@ -86,7 +86,7 @@ class UserController {
             $render = new Render();
             
             return $render->renderPage(
-                'user-removed.tpl', []
+                'user-removed.twig', []
             );
         }
         else {
