@@ -55,6 +55,22 @@ class User {
         $this->userBirthday = strtotime($birthdayString);
     }
 
+    public static function getUserFromStorageById(int $id): User {
+        
+        $sql = 'SELECT * FROM users WHERE id_user = :id';
+
+        $handler = Application::$storage->get()->prepare($sql);
+        $handler->execute(['id' => $id]);
+
+        $result = $handler->fetch();
+        return new User(
+            $result['user_name'],
+            $result['user_lastname'],
+            $result['user_birthday_timestamp'],
+            $result['id_user']);
+
+    }
+
     public static function getAllUsersFromStorage(): array {
         $sql = "SELECT * FROM users";
 
@@ -65,7 +81,7 @@ class User {
         $users = [];
 
         foreach($result as $item){
-            $user = new User($item['user_name'], $item['user_lastname'], $item['user_birthday_timestamp']);
+            $user = new User($item['user_name'], $item['user_lastname'], $item['user_birthday_timestamp'], $item['id_user']);
             $users[] = $user;
         }
         
@@ -121,15 +137,20 @@ class User {
     }
 
     public function updateUser(array $userDataArray): void{
+        //$sql = "UPDATE users SET client_name=? WHERE client_id = ?";
+        //          UPDATE users SET user_name = :user_name,id_user = :id_user
         $sql = "UPDATE users SET ";
-
+        var_dump($userDataArray);
         $counter = 0;
         foreach($userDataArray as $key => $value) {
             $sql .= $key ." = :".$key;
+            //var_dump($sql);
+            //echo </br>;
 
             if($counter != count($userDataArray)-1) {
-                $sql .= ",";
+                $sql .= " WHERE ";
             }
+            var_dump($sql);
 
             $counter++;
         }

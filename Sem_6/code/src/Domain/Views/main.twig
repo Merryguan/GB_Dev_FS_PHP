@@ -1,9 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>{{ title }}</title>
+        {% block head %}    
+            <meta charset="UTF-8">
+		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="./css/style.css">
+            <title>{% block title %}{{ title }}{% endblock %}</title>
+        {% endblock %}  
     </head>
     <body>
-        {% include content_template_name %}
+        <header class="header">
+            {% block header %}  
+            {% endblock %}  
+        </header>
+        <div class="main__box">
+            <nav class="main_sidebar">
+                <h1>Menu</h1>
+                <ul>
+                    {% for item, link in menu %}
+                        <li><a href="{{ link }}">{{ item }}</a></li>
+                     {% endfor %}
+                </ul>
+            </nav>
+            <main class="main__main">
+                <section class="main__info">
+                    {% include content_template_name %} 
+                </section>
+            </main>
+        </div> 
+        <footer class="footer">
+            {% block footer %}
+            {% endblock %}  
+        </footer>
     </body>
 </html>

@@ -63,7 +63,8 @@ class UserController {
             if(isset($_GET['lastname'])) {
                 $arrayData['user_lastname'] = $_GET['lastname'];
             }
-            
+            $arrayData['id_user'] = $_GET['id'];
+
             $user->updateUser($arrayData);
         }
         else {
@@ -72,7 +73,7 @@ class UserController {
 
         $render = new Render();
         return $render->renderPage(
-            'user-created.tpl', 
+            'user-created.twig', 
             [
                 'title' => 'Пользователь обновлен',
                 'message' => "Обновлен пользователь " . $user->getUserId()
@@ -94,5 +95,21 @@ class UserController {
         }
     }
 
+    public function actionShow() {
+        
+        $id = isset($_GET['id']) && is_numeric($_GET['id']) ? (int)$_GET['id'] : 0;
+
+        if (User::exists($id)) {
+            $user = User::getUserFromStorageById($id);
+            $render = new Render();
+            return $render->renderPage(
+                'user-page.twig',
+                [
+                    'user' => $user
+                ]);
+        } else {
+            throw new \Exception("Пользователь не существует");
+        }
+    }
     
 }

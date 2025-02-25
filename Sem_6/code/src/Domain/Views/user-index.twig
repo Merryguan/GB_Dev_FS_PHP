@@ -2,6 +2,6 @@
 
 <ul id="navigation">
     {% for user in users %}
-        <li>{{ user.getUserName() }} {{ user.getUserLastName() }}. День рождения: {{ user.getUserBirthday() | date('d.m.Y') }}</li>
+        <li><a href="/user/show/?id={{ user.getUserId() }}">{{ user.getUserName() }} {{ user.getUserLastName() }}. День рождения: {{ user.getUserBirthday() | date('d.m.Y') }}</a></li>
     {% endfor %}
 </ul>

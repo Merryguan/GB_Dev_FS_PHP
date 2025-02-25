@@ -8,6 +8,12 @@ class PageController {
     public function actionIndex() {
         $render = new Render();
         
-        return $render->renderPage('page-index.twig', ['title' => 'Главная страница']);
+        return $render->renderPage(
+            'page-index.twig',
+            ['title' => 'Главная страница',
+             'menu' => [
+                'Пользователи' => '/user'
+                ]
+            ]);
     }
 }
