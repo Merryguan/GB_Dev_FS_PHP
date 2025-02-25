@@ -10,10 +10,11 @@ class PageController {
         
         return $render->renderPage(
             'page-index.twig',
-            ['title' => 'Главная страница',
-             'menu' => [
-                'Пользователи' => '/user'
-                ]
+            [
+                'title' => 'Главная страница',
+                'menu' => [
+                            'Пользователи' => '/user'
+                          ]
             ]);
     }
 }

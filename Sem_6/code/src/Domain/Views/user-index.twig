@@ -1,3 +1,4 @@
+<section class="user__info">
 <p>Список пользователей в хранилище</p>
 
 <ul id="navigation">
@@ -5,3 +6,15 @@
         <li><a href="/user/show/?id={{ user.getUserId() }}">{{ user.getUserName() }} {{ user.getUserLastName() }}. День рождения: {{ user.getUserBirthday() | date('d.m.Y') }}</a></li>
     {% endfor %}
 </ul>
+</section>
+
+<section class="user__form">
+    <p>Изменение пользователя</p>
+    <form action="/user/update/" method="get">
+        <label for="id">id:</label>
+        <input type="text" id="id" name="id" placeholder="Введите айди" required>
+        <label for="fname">Имя:</label>
+        <input type="text" id="fname" name="name" placeholder="Введите имя">
+        <button type="submit">Отправить</button>
+    </form>
+</section>

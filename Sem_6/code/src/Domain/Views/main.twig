@@ -5,7 +5,7 @@
             <meta charset="UTF-8">
 		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="./css/style.css">
+            <link rel="stylesheet" href="/css/style.css">
             <title>{% block title %}{{ title }}{% endblock %}</title>
         {% endblock %}  
     </head>
@@ -25,6 +25,8 @@
             </nav>
             <main class="main__main">
                 <section class="main__info">
+                    {% block message %}  
+                    {% endblock %}
                     {% include content_template_name %} 
                 </section>
             </main>

@@ -17,6 +17,9 @@ class UserController {
                 'user-empty.twig', 
                 [
                     'title' => 'Список пользователей в хранилище',
+                    'menu' => [
+                                'Главная' => '/'
+                              ],
                     'message' => "Список пуст или не найден"
                 ]);
         }
@@ -25,6 +28,9 @@ class UserController {
                 'user-index.twig', 
                 [
                     'title' => 'Список пользователей в хранилище',
+                    'menu' => [
+                                'Главная' => '/'
+                            ],
                     'users' => $users
                 ]);
         }
@@ -76,23 +82,29 @@ class UserController {
             'user-created.twig', 
             [
                 'title' => 'Пользователь обновлен',
+                'menu' => [
+                            'Главная' => '/',
+                            'Пользователи' => '/user'
+                            ],
                 'message' => "Обновлен пользователь " . $user->getUserId()
             ]);
     }
 
     public function actionDelete(): string {
+
         if(User::exists($_GET['id'])) {
             User::deleteFromStorage($_GET['id']);
 
             $render = new Render();
             
             return $render->renderPage(
-                'user-removed.twig', []
+                'user-removed.twig',[]
             );
         }
         else {
             throw new \Exception("Пользователь не существует");
         }
+
     }
 
     public function actionShow() {
@@ -103,8 +115,13 @@ class UserController {
             $user = User::getUserFromStorageById($id);
             $render = new Render();
             return $render->renderPage(
-                'user-page.twig',
+                'user-show.twig',
                 [
+                    'title' => 'Информация о пользователе',
+                    'menu' => [
+                                'Главная' => '/',
+                                'Пользователи' => '/user'
+                                ],
                     'user' => $user
                 ]);
         } else {

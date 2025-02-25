@@ -137,20 +137,16 @@ class User {
     }
 
     public function updateUser(array $userDataArray): void{
-        //$sql = "UPDATE users SET client_name=? WHERE client_id = ?";
-        //          UPDATE users SET user_name = :user_name,id_user = :id_user
+
         $sql = "UPDATE users SET ";
-        var_dump($userDataArray);
+
         $counter = 0;
         foreach($userDataArray as $key => $value) {
             $sql .= $key ." = :".$key;
-            //var_dump($sql);
-            //echo </br>;
 
             if($counter != count($userDataArray)-1) {
                 $sql .= " WHERE ";
             }
-            var_dump($sql);
 
             $counter++;
         }
