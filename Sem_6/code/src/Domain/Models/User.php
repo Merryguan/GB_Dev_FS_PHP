@@ -154,8 +154,6 @@ class User {
 
             $counter++;
         }
-        var_dump($userDataArray);
-        var_dump($sql);
 
         $handler = Application::$storage->get()->prepare($sql);
         $handler->execute($userDataArray);
