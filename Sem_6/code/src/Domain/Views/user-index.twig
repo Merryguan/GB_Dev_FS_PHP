@@ -9,6 +9,19 @@
 </section>
 
 <section class="user__form">
+    <p>Добавление пользователя</p>
+    <form action="/user/save/" method="get">
+        <label for="fname">Имя:</label>
+        <input type="text" id="fname" name="name" placeholder="Введите имя" required>
+        <label for="lname">Фамилия:</label>
+        <input type="text" id="lname" name="lastname" placeholder="Введите фамилию" required>
+        <label for="birth">День рождения:</label>
+        <input type="text" id="birth" name="birthday" placeholder="Введите день рождения" required>
+        <button type="submit">Отправить</button>
+    </form>
+</section>
+
+<section class="user__form">
     <p>Изменение пользователя</p>
     <form action="/user/update/" method="get">
         <label for="id">id:</label>
