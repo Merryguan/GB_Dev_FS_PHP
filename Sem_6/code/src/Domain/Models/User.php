@@ -144,12 +144,18 @@ class User {
         foreach($userDataArray as $key => $value) {
             $sql .= $key ." = :".$key;
 
-            if($counter != count($userDataArray)-1) {
+            if($counter < count($userDataArray)-2) {
+                $sql .= ", ";
+            }
+
+            if($counter == count($userDataArray)-2) {
                 $sql .= " WHERE ";
             }
 
             $counter++;
         }
+        var_dump($userDataArray);
+        var_dump($sql);
 
         $handler = Application::$storage->get()->prepare($sql);
         $handler->execute($userDataArray);
