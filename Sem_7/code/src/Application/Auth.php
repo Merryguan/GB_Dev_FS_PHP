@@ -7,7 +7,51 @@ class Auth {
         return password_hash($_GET['pass_string'], PASSWORD_BCRYPT);
     }
 
-    public function proceedAuth(string $login, string $password): bool{
+    public function addCookie(string $login) {
+
+        $sql = "UPDATE users SET user_cookieid=:cookieid WHERE login = :login";
+
+        $coockieid = random_bytes(1);
+
+        $handler = Application::$storage->get()->prepare($sql);
+        $handler->execute(
+            [
+                'cookieid' => $coockieid,
+                'login' => $login
+            ]);
+
+        setcookie('COOKIEID', $coockieid, time() + 3600, '/');
+        
+    }
+
+    public function delCookie() {
+
+        setcookie('COOKIEID', 1, time() - 3600, '/');
+
+    }
+
+    public function proceedAuthByCookie(string $coockie): bool {
+        
+        $sql = "SELECT id_user, user_name, user_lastname FROM users WHERE user_cookieid = :cookieid";
+
+        $handler = Application::$storage->get()->prepare($sql);
+        $handler->execute(['cookieid' => $coockie]);
+        $result = $handler->fetchAll();
+
+        if (!empty($result)) {
+            $_SESSION['user_name'] = $result[0]['user_name'];
+            $_SESSION['user_lastname'] = $result[0]['user_lastname'];
+            $_SESSION['id_user'] = $result[0]['id_user'];
+           
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    public function proceedAuth(string $login, string $password): bool {
         $sql = "SELECT id_user, user_name, user_lastname, password_hash FROM users WHERE login = :login";
 
         $handler = Application::$storage->get()->prepare($sql);
@@ -18,7 +62,7 @@ class Auth {
             $_SESSION['user_name'] = $result[0]['user_name'];
             $_SESSION['user_lastname'] = $result[0]['user_lastname'];
             $_SESSION['id_user'] = $result[0]['id_user'];
-
+            
             return true;
         }
         else {

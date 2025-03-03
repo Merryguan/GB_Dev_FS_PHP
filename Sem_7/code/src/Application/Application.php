@@ -54,25 +54,22 @@ class Application {
             if(method_exists($this->controllerName, $this->methodName)){
                 $controllerInstance = new $this->controllerName();
 
-                if($controllerInstance instanceof AbstractController){
+                if($controllerInstance instanceof AbstractController) {
                     if($this->checkAccessToMethod($controllerInstance, $this->methodName)){
                         return call_user_func_array(
                             [$controllerInstance, $this->methodName],
                             []
                         );
-                    }
-                    else{
+                    } else {
                         return "Нет доступа к методу";
                     }
-                }
-                else{
+                } else {
                     return call_user_func_array(
                         [$controllerInstance, $this->methodName],
                         []
                     );
                 }
-            }
-            else {
+            } else {
                 return "Метод не существует";
             }
         }
@@ -84,11 +81,11 @@ class Application {
     private function checkAccessToMethod(AbstractController $controllerInstance, string $methodName): bool {
         $userRoles = $controllerInstance->getUserRoles();
 
-
+        if (empty($userRoles)) {
+            $userRoles = ['unauthorized'];
+        }
 
         $rules = $controllerInstance->getActionsPermissions($methodName);
-
-        $rules[] = 'user';
 
         $isAllowed = false;
 
@@ -102,6 +99,6 @@ class Application {
         }
 
         return $isAllowed;
-
     }
+
 }
