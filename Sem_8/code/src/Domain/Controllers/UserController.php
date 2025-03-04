@@ -21,7 +21,7 @@ class UserController extends AbstractController {
 
         if(!$users){
             return $render->renderPage(
-                'user-empty.tpl', 
+                'user-empty.twig', 
                 [
                     'title' => 'Список пользователей в хранилище',
                     'message' => "Список пуст или не найден"
@@ -29,7 +29,7 @@ class UserController extends AbstractController {
         }
         else{
             return $render->renderPage(
-                'user-index.tpl', 
+                'user-index.twig', 
                 [
                     'title' => 'Список пользователей в хранилище',
                     'users' => $users
@@ -46,7 +46,7 @@ class UserController extends AbstractController {
             $render = new Render();
 
             return $render->renderPage(
-                'user-created.tpl', 
+                'user-created.twig', 
                 [
                     'title' => 'Пользователь создан',
                     'message' => "Создан пользователь " . $user->getUserName() . " " . $user->getUserLastName()
@@ -61,7 +61,7 @@ class UserController extends AbstractController {
         $render = new Render();
         
         return $render->renderPageWithForm(
-                'user-form.tpl', 
+                'user-form.twig', 
                 [
                     'title' => 'Форма создания пользователя'
                 ]);
@@ -71,7 +71,7 @@ class UserController extends AbstractController {
         $render = new Render();
         
         return $render->renderPageWithForm(
-                'user-auth.tpl', 
+                'user-auth.twig', 
                 [
                     'title' => 'Форма логина'
                 ]);
@@ -92,7 +92,7 @@ class UserController extends AbstractController {
             $render = new Render();
 
             return $render->renderPageWithForm(
-                'user-auth.tpl', 
+                'user-auth.twig', 
                 [
                     'title' => 'Форма логина',
                     'auth-success' => false,
