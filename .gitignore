@@ -6,15 +6,20 @@
 /Sem_6/code/composer.lock
 /Sem_7/code/vendor/
 /Sem_7/code/composer.lock
+/Sem_8/code/vendor/
+/Sem_8/code/composer.lock
 
 # Ignore cache files
 /Sem_6/code/cache
 /Sem_7/code/cache
+/Sem_8/code/cache
 
 # Ignore .env
 /Sem_6/.env
 /Sem_7/.env
+/Sem_8/.env
 
 # ignore db files
 /Sem_6/db
 /Sem_7/db
+/Sem_8/db
