@@ -1,7 +1,16 @@
+
+<section class="user__info">
 <p>Список пользователей в хранилище</p>
 
 <ul id="navigation">
     {% for user in users %}
-        <li>{{ user.getUserName() }} {{ user.getUserLastName() }}. День рождения: {{ user.getUserBirthday() | date('d.m.Y') }}</li>
+        <li>
+            <div class="list__item">
+                <p>{{ user.getUserName() }} {{ user.getUserLastName() }}. День рождения: {{ user.getUserBirthday() | date('d.m.Y') }}</p>
+                <a href="/user/edit/?id={{ user.getUserId() }}">Обновить данные</a>
+                <a href="/user/delete/?id={{ user.getUserId() }}">Удалить</a>
+            </div>
+        </li>
     {% endfor %}
 </ul>
+</section>

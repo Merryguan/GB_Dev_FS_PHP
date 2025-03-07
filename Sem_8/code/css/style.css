@@ -66,3 +66,16 @@ a:visited {
     display: flex;
     gap: 30px;
 }
+
+.auth__error {
+    color: red;
+}
+
+.create__form {
+    display: flex;
+    gap: 30px;
+}
+
+.form__error {
+    color: red;
+}

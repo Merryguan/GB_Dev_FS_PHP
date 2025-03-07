@@ -27,7 +27,7 @@ class Render {
         if(isset($_SESSION['user_name'])){
             $templateVariables['user_authorized'] = true;
         }
- 
+
         return $template->render($templateVariables);
     }
 
@@ -35,7 +35,7 @@ class Render {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         
         $templateVariables['csrf_token'] = $_SESSION['csrf_token'];
- 
+
         return $this->renderPage($contentTemplateName, $templateVariables);
     }
 }

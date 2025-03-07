@@ -1,6 +1,8 @@
 <?php
 
 namespace Geekbrains\Application1\Domain\Controllers;
+
+use Geekbrains\Application1\Application\Application;
 use Geekbrains\Application1\Application\Render;
 
 class PageController {
@@ -20,9 +22,10 @@ class PageController {
                 'title' => 'Главная страница',
                 'menu' => [
                     'Пользователи' => '/user',
-                    'Выход' => '/page/logout'
+                    'Выход' => '/user/logout'
                 ],
                 'username' => $username
             ]);
     }
+
 }
